@@ -6,10 +6,5 @@ import com.mavha.mavhachallengetodobespring.domain.Todo;
 
 public interface TodoService {
 
-	/**
-	 * Returns all todo
-	 * 
-	 * @return {@link List} {@link Todo}
-	 */
 	List<Todo> getAll();
 }

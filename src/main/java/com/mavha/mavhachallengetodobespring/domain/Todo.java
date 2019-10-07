@@ -1,21 +1,17 @@
 package com.mavha.mavhachallengetodobespring.domain;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Represents a todo domain object
- * 
- * @author SergioCano
- *
- */
 @Entity
 @Table(name = "todo")
 @Data
@@ -23,13 +19,17 @@ import lombok.NoArgsConstructor;
 public class Todo {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name = "name", nullable = false)
+	private String name;
 	
 	@Column(name = "description")
 	private String description;
 	
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private StatusEnum status;
 	
 	@Column(name = "imagePath")
