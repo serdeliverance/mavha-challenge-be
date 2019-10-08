@@ -22,6 +22,7 @@ public class Todo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	// TODO: rename to title
 	@Column(name = "name", nullable = false)
 	private String name;
 	
