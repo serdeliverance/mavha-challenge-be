@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
@@ -21,14 +23,17 @@ import com.mavha.mavhachallengetodobespring.exception.FileStorageException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Profile("dev")
+@Profile({"dev", "default"})
 @Service
 public class FileSystemStorageService implements StorageService {
 	
-	private final Path fileStorageLocation;
+	private Path fileStorageLocation;
 
-    @Autowired
-    public FileSystemStorageService(FileStorageProperties fileStorageProperties) {
+	@Autowired
+	private FileStorageProperties fileStorageProperties;
+	
+    @PostConstruct
+    public void setFileStorageLocation() {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
         try {

@@ -29,7 +29,7 @@ public class Todo {
 	@Column(name = "status")
 	private String status;
 	
-	@Column(name = "imagePath")
+	@Column(name = "image_path")
 	private String imagePath;
 	
 	public static TodoBuilder builder() {

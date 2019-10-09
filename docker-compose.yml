@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mavha-be:
+    build: .
+    ports:
+      - 8081:8080
+    environment:
+      DB_USER: user
+      DB_PASSWORD: user
+      DB: todo_db
+      DB_HOST: localhost
+      DB_PORT: 8080
+    links:
+      - postgres-9-6
+
+  postgres-9-6:
+    build: ./postgres-9.6-dockerfile
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: todo_db
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 8082:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080

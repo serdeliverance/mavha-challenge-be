@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Profile("dev")
+@Profile({"dev", "default"})
 @ConfigurationProperties(prefix = "file")
 @Data
 @NoArgsConstructor
