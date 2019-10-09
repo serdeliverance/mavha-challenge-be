@@ -11,7 +11,7 @@ public class TodoConverter {
 		result.setId(source.getId());
 		result.setName(source.getName());
 		result.setDescription(source.getDescription());
-		result.setStatus(source.getStatus().name());
+		result.setStatus(source.getStatus());
 		result.setImagePath(source.getImagePath());
 		
 		return result;

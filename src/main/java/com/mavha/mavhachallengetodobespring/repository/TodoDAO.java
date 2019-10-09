@@ -32,7 +32,7 @@ public class TodoDAO {
 
 		optId.ifPresent(id -> predicates.add(criteriaBuilder.equal(todo.get("id"), id)));
 		optDesc.ifPresent(desc -> predicates.add(criteriaBuilder.like(todo.get("description"), "%" + desc + "%")));
-		optStatus.ifPresent(status -> predicates.add(criteriaBuilder.equal(todo.get("status"), status.name())));
+		optStatus.ifPresent(status -> predicates.add(criteriaBuilder.equal(todo.get("status"), status.name().toLowerCase())));
 
 		criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
