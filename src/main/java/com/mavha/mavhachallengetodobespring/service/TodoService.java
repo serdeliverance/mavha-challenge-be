@@ -36,7 +36,7 @@ public class TodoService {
 		return todoRepository.findById(id);
 	}
 
-	public Todo update(Todo todo) {
-		return todoRepository.save(todo);
+	public Optional<Todo> saveOrUpdate(Todo todo) {
+		return Optional.of(todoRepository.save(todo));
 	}
 }

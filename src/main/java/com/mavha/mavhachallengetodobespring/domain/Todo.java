@@ -20,7 +20,6 @@ public class Todo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	// TODO: rename to title
 	@Column(name = "name", nullable = false)
 	private String name;
 	
@@ -32,4 +31,41 @@ public class Todo {
 	
 	@Column(name = "imagePath")
 	private String imagePath;
+	
+	public static TodoBuilder builder() {
+		return new TodoBuilder();
+	}
+	
+	public static class TodoBuilder {
+		
+		private Todo todo;
+		
+		public TodoBuilder() {
+			todo = new Todo();
+		}
+		
+		public TodoBuilder withName(String name) {
+			todo.setName(name);
+			return this;
+		}
+		
+		public TodoBuilder withDescription(String description) {
+			todo.setDescription(description);
+			return this;
+		}
+		
+		public TodoBuilder withStatus(String status) {
+			todo.setStatus(status);
+			return this;
+		}
+		
+		public TodoBuilder withImagePath(String imagePath) {
+			todo.setImagePath(imagePath);
+			return this;
+		}
+		
+		public Todo build() {
+			return todo;
+		}
+	}
 }

@@ -11,16 +11,21 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mavha.mavhachallengetodobespring.converter.TodoConverter;
 import com.mavha.mavhachallengetodobespring.domain.StatusEnum;
+import com.mavha.mavhachallengetodobespring.domain.Todo;
 import com.mavha.mavhachallengetodobespring.dto.TodoDto;
 import com.mavha.mavhachallengetodobespring.service.TodoService;
+import com.mavha.mavhachallengetodobespring.storage.StorageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +36,9 @@ public class TodoController {
 
 	@Autowired
 	private TodoService todoService;
+
+	@Autowired
+	private StorageService storageService;
 
 	@GetMapping()
 	public List<TodoDto> getTodos() {
@@ -55,8 +63,21 @@ public class TodoController {
 	public TodoDto update(@Valid @RequestBody TodoDto todoDto, @PathVariable Integer id) {
 		log.info("Updating todo id: {}", todoDto.getId());
 		return todoService.findById(todoDto.getId()) //
-				.map(t -> todoService.update(matchFields(todoDto, t))) //
-				.map(TodoConverter::convertFromTodoToTodoDto) //
-				.orElseThrow(RuntimeException::new); // TODO change this exception
+				.flatMap(t -> todoService.saveOrUpdate(matchFields(todoDto, t))) //
+				.map(TodoConverter::convertFromTodoToTodoDto).orElseThrow(RuntimeException::new); // TODO change this exception
+	}
+
+	@PostMapping()
+	public TodoDto create(@RequestParam("name") String name, @RequestParam("description") String description,
+			@RequestParam("status") String status, @RequestParam(name = "file", required = false) MultipartFile file) {
+		log.info("Creating todo task");
+		String fileName = storageService.storeFile(file);
+		String imagePath = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/").path(fileName)
+				.toUriString();
+
+		return todoService.saveOrUpdate(Todo.builder() //
+				.withName(name).withDescription(description) //
+				.withStatus(status).withImagePath(imagePath).build()) //
+				.map(TodoConverter::convertFromTodoToTodoDto).orElseThrow(RuntimeException::new); // TODO change this exception
 	}
 }
