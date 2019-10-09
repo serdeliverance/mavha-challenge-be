@@ -31,7 +31,7 @@ public class TodoController {
 				.collect(toList());
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "search")
 	public List<TodoDto> search(@RequestParam(name = "id", required = false) Optional<Integer> optId,
 			@RequestParam(name = "desc", required = false) Optional<String> optDesc,
 			@RequestParam(name = "status", required = false) Optional<String> optStatus) {

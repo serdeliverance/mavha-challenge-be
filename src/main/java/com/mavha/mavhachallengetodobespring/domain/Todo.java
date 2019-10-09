@@ -30,8 +30,7 @@ public class Todo {
 	private String description;
 	
 	@Column(name = "status")
-	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	private String status;
 	
 	@Column(name = "imagePath")
 	private String imagePath;
