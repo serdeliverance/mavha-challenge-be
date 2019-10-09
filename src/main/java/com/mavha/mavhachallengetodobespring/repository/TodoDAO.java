@@ -16,6 +16,9 @@ import org.springframework.stereotype.Repository;
 import com.mavha.mavhachallengetodobespring.domain.StatusEnum;
 import com.mavha.mavhachallengetodobespring.domain.Todo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class TodoDAO {
 
@@ -24,6 +27,8 @@ public class TodoDAO {
 
 	public List<Todo> findTodoByIdDescAndState(Optional<Integer> optId, Optional<String> optDesc,
 			Optional<StatusEnum> optStatus) {
+		log.info("Querying todo by criteria");
+		
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Todo> criteriaQuery = criteriaBuilder.createQuery(Todo.class);
 

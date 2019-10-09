@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.mavha.mavhachallengetodobespring.domain.Todo;
 
 @Repository
-public interface TodoRepository extends CrudRepository<Todo, Integer> {
+public interface TodoRepository extends CrudRepository<Todo, Long> {
 
 	List<Todo> findAll();
 }

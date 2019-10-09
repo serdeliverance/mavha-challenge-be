@@ -11,6 +11,9 @@ import com.mavha.mavhachallengetodobespring.domain.Todo;
 import com.mavha.mavhachallengetodobespring.repository.TodoDAO;
 import com.mavha.mavhachallengetodobespring.repository.TodoRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TodoService {
 
@@ -21,10 +24,19 @@ public class TodoService {
 	private TodoDAO todoDao;
 	
 	public List<Todo> getAll() {
+		log.info("Getting all todo tasks");
 		return todoRepository.findAll();
 	}
 
 	public List<Todo> search(Optional<Integer> optId, Optional<String> optDesc, Optional<StatusEnum> optStatus) {
 		return todoDao.findTodoByIdDescAndState(optId, optDesc, optStatus);
+	}
+	
+	public Optional<Todo> findById(Long id) {
+		return todoRepository.findById(id);
+	}
+
+	public Todo update(Todo todo) {
+		return todoRepository.save(todo);
 	}
 }
