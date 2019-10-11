@@ -27,8 +27,14 @@ docker-compose up
 
 It will build the app and then it will build a docker image based on our build. In addition, docker compose contains Postgresql configured.
 
-## Notes (for docker users)
+## Postman collection with all the enpoints
 
-* Uploaded files are storage on fileSystem inside the mavha-be docker container and It has not a volume defined yet. So, after stopping the container, files will be discard.
+Check postman-collections folder and import its collection into postman to test the API.
 
-* You can explore the app's data using the adminer, which is running on `http://localhost:8080/`. Check docker-compose.yml for credentials.
+## Notes
+
+* (for docker users) Uploaded files are storage on fileSystem inside the mavha-be docker container and It has not a volume defined yet. So, after stopping the container, files will be discard.
+
+* (for docker users) You can explore the app's data using the adminer, which is running on `http://localhost:8080/`. Check docker-compose.yml for credentials.
+
+* Search/filter functionality is not implemented on the frontend but it's on the backend API.
