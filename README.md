@@ -15,7 +15,7 @@ Docker-compose
 
 Run `mvn spring-boot:run -Dspring.profiles.active=dev` for a dev server. It will start up the application using and in-memory database with some dummy data. The application would be running on `http://localhost:8080/`.
 
-## Run with Docker-compose
+## Run with Docker-compose (need to fix issues, don't use it)
 
 First, create a docker network with the follow command (you'll only need to do that once):
 
