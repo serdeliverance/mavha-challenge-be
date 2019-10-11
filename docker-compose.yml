@@ -9,7 +9,7 @@ services:
       DB_USER: user
       DB_PASSWORD: user
       DB: todo_db
-      DB_HOST: http://postgres-9-6
+      DB_HOST: postgres-9-6
       DB_PORT: 8080
     links:
       - postgres-9-6
@@ -31,3 +31,8 @@ services:
     restart: always
     ports:
       - 8083:8080
+
+networks:
+  default:
+    external:
+      name: mavha-be

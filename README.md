@@ -17,6 +17,10 @@ Run `mvn spring-boot:run -Dspring.profiles.active=dev` for a dev server. It will
 
 ## Run with Docker-compose
 
+First, create a docker network with the follow command (you'll only need to do that once):
+
+`docker network create --driver bridge mavha-be`
+
 To run the application in a more realistic environment using docker, execute the following commands:
 
 ```
