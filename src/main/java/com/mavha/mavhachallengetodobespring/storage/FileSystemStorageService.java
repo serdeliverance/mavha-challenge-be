@@ -23,7 +23,6 @@ import com.mavha.mavhachallengetodobespring.exception.FileStorageException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Profile({"dev", "default"})
 @Service
 public class FileSystemStorageService implements StorageService {
 	

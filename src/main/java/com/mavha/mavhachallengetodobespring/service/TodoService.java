@@ -32,11 +32,13 @@ public class TodoService {
 		return todoDao.findTodoByIdDescAndState(optId, optDesc, optStatus);
 	}
 	
-	public Optional<Todo> findById(Long id) {
+	public Optional<Todo> getById(Long id) {
 		return todoRepository.findById(id);
 	}
 
 	public Optional<Todo> saveOrUpdate(Todo todo) {
 		return Optional.of(todoRepository.save(todo));
 	}
+
+	
 }

@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(Include.NON_NULL)
 public class TodoDto {
+	
+	public static final TodoDto EMPTY_TODO_DTO = new TodoDto();
 
 	private Long id;
 	private String name;
