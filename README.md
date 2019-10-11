@@ -1,1 +1,34 @@
 # mavha-challenge-todo-be-spring
+
+Mavha Challenge backend project built on Spring Boot with Postgres and Docker. It also contains and adminer UI for looking at the DBs data.
+
+## Pre requisites
+
+```
+Jdk 1.8
+Maven 3.x
+Docker
+Docker-compose
+```
+
+## Development server
+
+Run `mvn spring-boot:run -Dspring.profiles.active=dev` for a dev server. It will start up the application using and in-memory database with some dummy data. The application would be running on `http://localhost:8080/`.
+
+## Run with Docker-compose
+
+To run the application in a more realistic environment using docker, execute the following commands:
+
+```
+mvn clean install
+docker-compose build
+docker-compose up
+```
+
+It will build the app and then it will build a docker image based on our build. In addition, docker compose contains Postgresql configured.
+
+## Notes (for docker users)
+
+* Uploaded files are storage on fileSystem inside the mavha-be docker container and It has not a volume defined yet. So, after stopping the container, files will be discard.
+
+* You can explore the app's data using the adminer, which is running on `http://localhost:8080/`. Check docker-compose.yml for credentials.
